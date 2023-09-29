@@ -1,6 +1,7 @@
 # rm-code-specification
 VANGUARD战队电控组C语言代码规范  
-## 1.文件  
+[链接文本](2)  
+## <a name="1"></a>1.文件  
 ### 1.1 头文件  
 ·头文件的命名应当遵循规范如`<PATH>_<FILE>.h`，模块名与文件名均为 **纯英文小写** ，采用下划线分隔。例：  
 ```
@@ -64,10 +65,10 @@ void Path_FunctionName()
 }
 ...
 ```  
-## 2.标识符命名  
+## <a name="2"></a>2.标识符命名  
   
 ### 2.0 命名总则  
-·本规范中使用的标识符的命名方法有 **驼峰命名法** 和 **下划线分隔法** 两种。
+·本规范中使用的标识符的命名方法有 **驼峰命名法** 和 **下划线分隔法** 两种。  
 驼峰命名法即为大小写分隔单词，有首字母大写和首字母小写两种形式。例：  
 ```
 int ChassisType;
@@ -107,7 +108,7 @@ int chassis_type;
 ```
 
 ### 2.3 结构体  
-·结构体类型的定义统一采用`typedef`定义数据类型的方式，其命名统一为`<name>_t`，其中名称部分采用 **首字母大写** ，并使用下划线分隔单词。  
+·结构体类型的定义统一采用`typedef`定义数据类型的方式，其命名统一为`<name>_t`，其中名称部分采用 **纯小写英文** ，并使用下划线分隔单词。  
 结构体的成员，无论其是否为普通变量，一律采用 **纯小写英文** 。例：  
 ```
 typedef struct
@@ -116,14 +117,14 @@ typedef struct
   {
     int target_speed_x;
   }move;
-} Chassis_Struct_t;
+} chassis_struct_t;
 ```
-·声明结构体时命名规范与变量命名规范完全一致。例：`Chassis_Struct_t chassis_1`  
+·声明结构体时命名规范与变量命名规范完全一致。例：`chassis_struct_t chassis_1`  
 
 ### 2.4 枚举型变量  
 ·枚举类型的定义与结构体类似，但结尾改为`_e`，且其成员命名统一采用 **纯大写英文** 。例：  
 ```
-enum Chassis_Type_e
+enum chassis_type_e
 {
   MECANMUN = 0,
   OMNI_4 = 1,
@@ -153,11 +154,11 @@ typedef struct ReceivePacket
 ·定义了多个本质相同但命名不同的数据类型  
 ·_receivepacket为指针类型，但在命名中未加`_P`后缀  
 
-## 3.变量使用规范  
+## <a name="3"></a>3.变量使用规范  
 ·在进行程序编写时，应当尽可能少使用全局变量。如果需要使用全局变量，应当使用`static`关键字进行修饰。除非有极特殊需求，否则不应在一个模块中直接调用另一个模块的全局变量，而是采用函数方式获取该变量的信息。  
 例：  
 ```
-static Gimbal_t gimbal;
+static gimbal_t gimbal;
 
 bool Gimbal_SetTargetAngle(float angle_pitch,float angle_yaw)
 {
@@ -185,7 +186,7 @@ r.a = 1;
 r->b = 2;
 ```  
   
-## 4.换行和缩进规范  
+## <a name="4"></a>4.换行和缩进规范  
 ### 4.1 换行  
 ·除包含长路径的`#include`语句和 **头文件保护** 以外，如果某一语句长度超过了八十个字符，在同一行会影响阅读，则应换行。
 ·布尔表达式的换行应让逻辑运算符始终在行的末尾，换行后首字符要与上一行对齐。例：  
@@ -205,7 +206,6 @@ void Function_Name()
   {
   ...
   }
-  
   while(1)
   {
   ...
@@ -247,7 +247,7 @@ if(a)
 }
 ```
   
-## 5.注释规范  
+## <a name="5"></a>5.注释规范  
 ### 5.1 注释风格  
 ·注释风格可以选择`//`或`/**/`两种，无硬性要求。   
 ·所有的注释应添加在被注释对象的上方。  
@@ -277,7 +277,7 @@ int a;
 //angle_to_gimbal ：底盘相对于云台的角度
 typedef struct
 {
-	Chassis_Type_e type;
+	chassis_type_e type;
 	struct
 	{
     ...
@@ -293,7 +293,7 @@ typedef struct
 	PID_t pid_motor_speed[4];
 	PID_t pid_chassis_angle;
 	float angle_to_gimbal;
-}Chassis_t;
+}chassis_t;
 ```
 
 ### 5.4 函数注释  
@@ -302,10 +302,10 @@ typedef struct
 ```
 /*
  * @brief	底盘功率控制程序
- * @param	底盘结构体
+ * @param	chassis	底盘结构体的地址
  * @retval	无
  */
-void Chassis_PowerCtrl(Chassis_Typedef_t *chassis)
+void Chassis_PowerCtrl(chassis_t *chassis)
 {
   ...
 }
@@ -318,14 +318,14 @@ void Chassis_PowerCtrl(Chassis_Typedef_t *chassis)
 typedef struct
 {
   //type: 底盘类型，取值可以是Chassis_Type_e的成员之一
-	Chassis_Type_e type;
+	chassis_type_e type;
   ...
-}Chassis_t;
+}chassis_t;
 ```
 ·所有全局变量也要注释说明含义及用途，例:  
 ```
 //云台状态变量结构体
-static Gimbal_t gimbal;
+static gimbal_t gimbal;
 ```
 注意，此处仅为示例，实际使用中应避免将云台状态等变量定义为全局变量。  
 
@@ -334,26 +334,26 @@ static Gimbal_t gimbal;
 ·`TODO`注释采用 **全大写** 的字符串`TODO`，在字符串后的圆括号中写上自己的姓名，同时加上简单的描述。  
 例：  
 ```
-void Chassis_Slove(Chassis_Typedef_t *chassis)
+void Chassis_Slove(chassis_t *chassis)
 {
 	//TODO(李四)麦轮底盘解算
 	if(chassis->type == Mecanum)
 	{
-    return;
+		return;
 	}
 	//TODO(张三)全向四轮底盘解算
 	if(chassis->type == Omni_4)
 	{
-    return;
+		return;
 	}
 
 }
 ```
 
-## 6.其他规范  
+## <a name="6"></a>6.其他规范  
 ### 6.1  编码方式  
-·在同一工程中，必须统一编码方式。一般统一为GBK编码或UTF-8编码。
-·为防止出现乱码，严禁在编码方式不对应的情况下保存某一文件。  
+·在同一工程中，必须统一编码方式。一般统一为GBK编码或UTF-8编码。  
+·为防止出现乱码，严禁将某一文件直接保存为不对应的编码格式。  
 
 ### 6.2 预处理指令  
 ·所有预处理指令都不应有缩进，应直接从行首开始。  
