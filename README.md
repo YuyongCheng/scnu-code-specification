@@ -344,12 +344,12 @@ static gimbal_t gimbal;
 void Chassis_Slove(chassis_t *chassis)
 {
 	//TODO(李四)麦轮底盘解算
-	if(chassis->type == Mecanum)
+	if(chassis->type == MECANUM)
 	{
 		return;
 	}
 	//TODO(张三)全向四轮底盘解算
-	if(chassis->type == Omni_4)
+	if(chassis->type == OMNI_4)
 	{
 		return;
 	}
