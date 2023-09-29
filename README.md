@@ -393,4 +393,14 @@ void Function_Name()
 {
   return (a);
 }
+```  
+
+### 6.5 数据长度  
+·若某处需要用到某个数据的长度，不应该直接使用常数，而是应当使用`sizeof`关键字。例：  
+```
+//正确示例
+USB_SendData(&usb_send_data,sizeof(usb_send_data));
+USB_SendData(&usb_send_data,sizeof(usb_send_data_t));
+//错误示例
+USB_SendData(&usb_send_data,10);
 ```
