@@ -1,4 +1,4 @@
-# rm-code-specification
+# scnu-code-specification
 华南师范大学(佛山校区)VANGUARD战队电控组 **STM32端** C语言代码规范  
 ## 目录  
 [1.文件](#1文件)  
