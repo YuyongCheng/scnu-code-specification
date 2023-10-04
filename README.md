@@ -324,7 +324,7 @@ void Chassis_PowerCtrl(chassis_t *chassis)
 ```
 typedef struct
 {
-  //type: 底盘类型，取值可以是Chassis_Type_e的成员之一
+  //type: 底盘类型，取值可以是chassis_type_e的成员之一
 	chassis_type_e type;
   ...
 }chassis_t;
