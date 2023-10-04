@@ -386,7 +386,7 @@ void Function_Name()
   return ((a+b+c)&&(b+c+d));
 }
 ```
-·若表达式较长，则不要添加不必要的圆括号。  
+·若表达式较短，则不要添加不必要的圆括号。  
 错误示例：  
 ```
 void Function_Name()
